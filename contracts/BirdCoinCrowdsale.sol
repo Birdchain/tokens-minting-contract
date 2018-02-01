@@ -7,8 +7,8 @@ import "./BirdCoin.sol";
 contract BirdCoinCrowdsale is Ownable {
     using SafeMath for uint256;
 
-    address constant ALLOCATOR_WALLET = 0xb958b63fe19fefb721ac6d98e5ccfce88986ae80;
-    uint256 constant public CAP = 2000 ether;
+    address constant ALLOCATOR_WALLET = 0x0;
+    uint256 constant public CAP = 580263158 ether;
     BirdCoin public token;
 
     bool public areTokensUnlocked = false;
@@ -21,13 +21,9 @@ contract BirdCoinCrowdsale is Ownable {
         _;
     }
 
-    /******************************* Constructor  ********************************/
-
     function BirdCoinCrowdsale() {
         token = new BirdCoin();
     }
-
-    /**************************** Token allocation  *****************************/
 
     function allocateTokens(address addr, uint256 tokenAmount) public onlyAllocator {
         require(validPurchase(tokenAmount));
@@ -45,8 +41,6 @@ contract BirdCoinCrowdsale is Ownable {
 
         return !isCapReached;
     }
-
-    /******************************* Token unlock  ********************************/
 
     function unlockTokens() onlyOwner public {
         require(!areTokensUnlocked);
